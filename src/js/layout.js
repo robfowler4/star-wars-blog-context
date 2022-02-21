@@ -1,14 +1,15 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+
 import ScrollToTop from "./component/scrollToTop";
+import injectContext from "./store/appContext";
 
 import { Home } from "./views/home";
 import { Demo } from "./views/demo";
-import { Single } from "./views/single";
-import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { Details } from "./views/details";
 
 //create your first component
 const Layout = () => {
@@ -17,20 +18,18 @@ const Layout = () => {
 	const basename = process.env.BASENAME || "";
 
 	return (
-		<div>
+		<div style={{ backgroundImage: `url(https://wallpapercave.com/wp/wp2572362.jpg)`, bbackgroundRepeat: "no-repeat", backgroundSize: "contain" }}>
+
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<Navbar />
 					<Switch>
-						<Route exact path="/">
-							<Home />
-						</Route>
-						<Route exact path="/demo">
-							<Demo />
-						</Route>
-						<Route exact path="/single/:theid">
-							<Single />
-						</Route>
+						<Route exact path="/" component={Home} />
+
+						<Route exact path="/demo" component={Demo} />
+
+						<Route exact path="/details/:name" component={Details} />
+
 						<Route>
 							<h1>Not found!</h1>
 						</Route>
@@ -38,6 +37,7 @@ const Layout = () => {
 					<Footer />
 				</ScrollToTop>
 			</BrowserRouter>
+
 		</div>
 	);
 };
